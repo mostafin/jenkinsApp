@@ -1,28 +1,31 @@
----
+--- 
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: myapp-deployment
-  labels:
+metadata: 
+  labels: 
     app: myappnew
-spec:
+  name: myapp-deployment
+spec: 
   replicas: 4
-  selector:
-    matchLabels:
+  selector: 
+    matchLabels: 
       app: myappnew
-  template:
-    metadata:
-      labels:
+  template: 
+    metadata: 
+      labels: 
         app: myappnew
         env: production
-    spec:
-      containers:
-      - name: myappnew
-        image: mycontainerdev.azurecr.io/trial:v1.0.0
-        ports:
-        - containerPort: 4000
-      imagePullSecrets:
-      - name: acr-auth
+    spec: 
+      containers: 
+        - 
+          image: "mycontainerdev.azurecr.io/trial:v1.0.0"
+          name: myappnew
+          ports: 
+            - 
+              containerPort: 4000
+      imagePullSecrets: 
+        - 
+          name: acr-auth
 ---
 apiVersion: v1
 kind: Service
