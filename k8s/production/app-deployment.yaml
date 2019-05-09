@@ -6,7 +6,7 @@ metadata:
   labels:
     app: myappnew
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: myappnew
@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: myappnew
+        env: production
     spec:
       containers:
       - name: myappnew
