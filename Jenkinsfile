@@ -40,3 +40,5 @@ node {
         sh("kubectl get ns ${appName}-${env.BRANCH_NAME} || kubectl create ns ${appName}-${env.BRANCH_NAME}")
         // Don't use public load balancing for development branches
   }
+ }
+}
