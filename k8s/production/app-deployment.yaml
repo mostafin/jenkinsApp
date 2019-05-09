@@ -1,10 +1,10 @@
 --- 
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1
+kind: ReplicaSet
 metadata: 
   labels: 
     app: myappnew
-  name: myapp-deployment
+  name: myapp-ReplicaSet
 spec: 
   replicas: 4
   selector: 
