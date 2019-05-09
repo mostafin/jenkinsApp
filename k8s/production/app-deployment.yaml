@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myappnew
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myappnew
+  template:
+    metadata:
+      labels:
+        app: myappnew
+    spec:
+      containers:
+      - name: myappnew
+        image: mycontainerdev.azurecr.io/trial:v1.0.0
+        ports:
+        - containerPort: 4000
+      imagePullSecrets:
+      - name: acr-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 4000
+  selector:
+    app: myappnew

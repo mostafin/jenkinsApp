@@ -1,0 +1,8 @@
+version: '3'
+services:
+  python:
+    image: "python:3.8-rc-stretch"
+    build: .
+    ports:
+      - "4000:4000"
+    container_name: python-app
