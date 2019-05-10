@@ -23,7 +23,6 @@ node {
     case "canary":
         // Change deployed image in canary to the one we just built
         sh("sed -i.bak 's#${appRepo}#${imageTag}#' ./k8s/canary/*.yaml")
-        sh("sudo kubectl --kubeconfig ~mostafin/.kube/config --namespace=trial-production apply -f k8s/services/")
         sh("sudo kubectl --kubeconfig ~mostafin/.kube/config --namespace=trial-production apply -f k8s/canary/")
         sh("echo http://`kubectl --namespace=trial-production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")
         break
@@ -36,7 +35,6 @@ node {
           sh "sudo kubectl --kubeconfig ~mostafin/.kube/config -n ${appName}-${env.BRANCH_NAME} get secret acr-auth || sudo kubectl --kubeconfig ~mostafin/.kube/config --namespace=${appName}-${env.BRANCH_NAME} create secret docker-registry acr-auth --docker-server ${acr} --docker-username $USERNAME --docker-password $PASSWORD"
         } 
         sh("sed -i.bak 's#${appRepo}#${imageTag}#' ./k8s/production/*.yaml")
-        sh("sudo kubectl --kubeconfig ~mostafin/.kube/config --namespace=trial-production apply -f k8s/services/")
         sh("sudo kubectl --kubeconfig ~mostafin/.kube/config --namespace=trial-production apply -f k8s/production/")
         sh("echo http://`kubectl --namespace=trial-production get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${appName}")
         break
