@@ -1,23 +1,23 @@
 --- 
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata: 
   labels: 
-    app: myappnew
-  name: myapp-ReplicaSet
+    app: trial
+  name: myapp-deployment
 spec: 
   replicas: 4
   selector: 
     matchLabels: 
-      app: myappnew
+      app: trial
   template: 
     metadata: 
       labels: 
-        app: myappnew
+        app: trial
         env: production
     spec:
       containers:
-      - name: myappnew
+      - name: trial
         image: mycontainerdev.azurecr.io/trial:v1.0.0
         ports:
         - containerPort: 4000
@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-service
+  name: trial
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 4000
   selector:
-    app: myappnew
+    app: trial
