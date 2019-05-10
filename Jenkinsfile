@@ -3,7 +3,7 @@ node {
     checkout scm
 
         stage('Build') {
-            sh("sudo kubectl get all")
+            sh("sudo kubectl --kubeconfig ~mostafin/.kube/config get ns")
         }
         stage('Test') {
                 echo 'Testing..'
