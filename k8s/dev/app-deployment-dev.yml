@@ -1,0 +1,41 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: trial
+  name: myapp-deployment
+spec: 
+  replicas: 4
+  selector: 
+    matchLabels: 
+      app: trial
+  template: 
+    metadata: 
+      labels: 
+        app: trial
+        env: dev
+    spec: 
+      containers: 
+        - 
+          image: mycontainerdev.azurecr.io/trial:v1.0.0
+          name: trial
+          ports: 
+            - 
+              containerPort: 4000
+      imagePullSecrets: 
+        - 
+          name: acr-auth
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  name: trial
+spec: 
+  ports: 
+    - 
+      port: 80
+      targetPort: 4000
+  selector: 
+    app: trial
+  type: ClusterIP
