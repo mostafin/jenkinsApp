@@ -3,7 +3,7 @@ node {
     checkout scm
 
         stage('Build') {
-            sh("kubectl get node")
+            sh("kubectl get ns")
         }
         stage('Test') {
                 echo 'Testing..'
