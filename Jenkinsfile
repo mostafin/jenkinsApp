@@ -30,7 +30,7 @@ node {
     // Roll out to production
     case "master":
         // Change deployed image in master to the one we just built
-        sh("sed -i.bak 's#${appRepo}#${imageTag}#' ./k8s/production/*.yaml")
+        sh("sed -i.bak 's#${appRepo}#${imageTag}#' ./k8s/production/*.yml")
         sh("kubectl --namespace=${appNs} apply -f k8s/production/")
         sh("echo http://kubectl --namespace=${appNs} get service/${appName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip' > ${appName}")
         break
