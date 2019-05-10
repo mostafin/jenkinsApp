@@ -14,14 +14,15 @@ spec:
       labels: 
         app: trial
         env: production
-    spec:
-      containers:
-      - name: trial
-        image: mycontainerdev.azurecr.io/trial:v1.0.0
-        ports:
-        - containerPort: 4000
-      imagePullSecrets:
-      - name: acr-auth
+    spec: 
+      containers: 
+        - 
+          image: "mycontainerdev.azurecr.io/trial:v1.0.0"
+          name: trial
+          ports: 
+            - containerPort: 4000
+      imagePullSecrets: 
+        - name: acr-auth
 ---
 apiVersion: v1
 kind: Service
